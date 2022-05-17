@@ -24,5 +24,5 @@ fun Application.module() {
     configureRouting(userDataSource, hashingService)
     configureSerialization()
     configureMonitoring()
-    configureSecurity()
+//    configureSecurity()
 }
