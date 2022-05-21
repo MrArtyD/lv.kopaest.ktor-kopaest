@@ -11,6 +11,10 @@ plugins {
                 id("org.jetbrains.kotlin.plugin.serialization") version "1.6.21"
 }
 
+tasks.getByName("jar") {
+    enabled = false
+}
+
 group = "lv.kopaest"
 version = "0.0.1"
 application {
