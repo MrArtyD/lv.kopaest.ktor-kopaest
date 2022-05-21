@@ -16,7 +16,7 @@ fun main(args: Array<String>): Unit =
 fun Application.module() {
 
     val databaseName = "ko-paest-db"
-    val mongoPassword = environment.config.propertyOrNull("ktor.dbpw")?.getString() //System.getenv("MONGO_PW")
+    val mongoPassword = System.getenv("MONGO_PW")
     val database = KMongo.createClient(
         connectionString = "mongodb+srv://artyd:$mongoPassword@clusterkopaest.1xjfu.mongodb.net/$databaseName?retryWrites=true&w=majority"
     ).coroutine.getDatabase(databaseName)
