@@ -2,6 +2,7 @@ package lv.kopaest
 
 import io.ktor.server.application.*
 import lv.kopaest.data.user.MongoUserDataSource
+import lv.kopaest.plugins.configureCors
 import lv.kopaest.plugins.configureMonitoring
 import lv.kopaest.plugins.configureRouting
 import lv.kopaest.plugins.configureSerialization
@@ -26,5 +27,6 @@ fun Application.module() {
     configureRouting(userDataSource, hashingService)
     configureSerialization()
     configureMonitoring()
+    configureCors()
 //    configureSecurity()
 }
