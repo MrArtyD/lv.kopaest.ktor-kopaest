@@ -25,4 +25,13 @@ class MongoRecipeDataSource(database: CoroutineDatabase) : RecipeDataSource {
         val recipe = recipes.findOne(Recipe::remoteId eq recipeId) ?: return false
         return userId in recipe.users
     }
+
+    override suspend fun deleteRecipeForUser(userId: String, recipeId: Int): Boolean {
+        val recipe = recipes.findOne(Recipe::remoteId eq recipeId, Recipe::users contains userId) ?: return false
+        if (recipe.users.size > 1) {
+            val leftUsers = recipe.users - userId
+            return recipes.updateOne(Recipe::id eq recipe.id, setValue(Recipe::users, leftUsers)).wasAcknowledged()
+        }
+        return recipes.deleteOneById(recipe.id).wasAcknowledged()
+    }
 }

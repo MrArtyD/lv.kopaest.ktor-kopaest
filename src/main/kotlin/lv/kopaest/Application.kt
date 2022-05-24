@@ -1,6 +1,7 @@
 package lv.kopaest
 
 import io.ktor.server.application.*
+import lv.kopaest.data.recipe.MongoRecipeDataSource
 import lv.kopaest.data.user.MongoUserDataSource
 import lv.kopaest.plugins.configureCors
 import lv.kopaest.plugins.configureMonitoring
@@ -22,9 +23,10 @@ fun Application.module() {
         connectionString = "mongodb+srv://artyd:$mongoPassword@clusterkopaest.1xjfu.mongodb.net/$databaseName?retryWrites=true&w=majority"
     ).coroutine.getDatabase(databaseName)
     val userDataSource = MongoUserDataSource(database)
+    val recipeDataSource = MongoRecipeDataSource(database)
     val hashingService = SHA256HashingService()
 
-    configureRouting(userDataSource, hashingService)
+    configureRouting(userDataSource, recipeDataSource, hashingService)
     configureSerialization()
     configureMonitoring()
     configureCors()

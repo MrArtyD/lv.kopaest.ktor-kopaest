@@ -6,4 +6,6 @@ interface RecipeDataSource {
     suspend fun addUserToRecipe(userId: String, recipeId: Int): Boolean
     suspend fun getAllRecipesForUser(userId: String): List<Recipe>
     suspend fun checkIfUserHasRecipe(userId: String, recipeId: Int): Boolean
+
+    suspend fun deleteRecipeForUser(userId: String, recipeId: Int): Boolean
 }
