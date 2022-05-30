@@ -4,9 +4,7 @@ import io.ktor.server.application.*
 import io.ktor.server.routing.*
 import lv.kopaest.data.recipe.RecipeDataSource
 import lv.kopaest.data.user.UserDataSource
-import lv.kopaest.routes.recipeRoutes
-import lv.kopaest.routes.signIn
-import lv.kopaest.routes.signUp
+import lv.kopaest.routes.*
 import lv.kopaest.security.hashing.HashingService
 
 fun Application.configureRouting(
@@ -19,5 +17,7 @@ fun Application.configureRouting(
         signUp(userDataSource, hashingService)
         signIn(userDataSource, hashingService)
         recipeRoutes(recipeDataSource)
+        changePassword(userDataSource, hashingService)
+        sendNewPassword(userDataSource, hashingService)
     }
 }
